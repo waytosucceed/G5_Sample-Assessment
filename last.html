@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0">
+	<title>Bar Chart Example</title>
+	<link rel="stylesheet" href="wts.css">
+	<link rel="icon" type="image/x-icon" href="Logo_last.png"> 	
+
+
+	<!-- Include Chart.js from CDN -->
+	<script src=
+"https://cdn.jsdelivr.net/npm/chart.js">
+	</script>
+	
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			margin: 20px;
+			text-align: center;
+		}
+
+
+		h1 {
+			color: green;
+		}
+
+		canvas {
+			border: 2px solid #858080;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header" style="width:100%; box-shadow:5px 5px 10px rgb(0, 0, 0); padding-bottom:10px;">
+		<img src="Logo.png" width="5%" style="float:left; margin-top:25px;" class="img-responsive">
+		<span> <img src="header.png" width="30%" height="100px" class="img-responsive"></span>
+	</div>
+	<br>
+	<br>
+
+	<!-- Creating an element -->
+	<canvas id="myBarChart"
+			width="300px"
+			height="100px">
+	</canvas>
+
+	<script>
+            
+        value1=Math.round((localStorage.getItem("score1")*100)/6)
+        value2=Math.round((localStorage.getItem("score2")*100)/6) 
+        value3=Math.round((localStorage.getItem("score3")*100)/5)
+        value4=Math.round((localStorage.getItem("score4")*100)/6)
+        value5=Math.round((localStorage.getItem("score5")*100)/7)
+        value6=Math.round((localStorage.getItem("score6")*100)/6)
+        value7=Math.round((localStorage.getItem("score7")*100)/6)
+        value8=Math.round((localStorage.getItem("score8")*100)/6)
+
+		// data sample for the chart
+		let data = {
+			labels: ["Homophones", "Synonyms", "Antonyms", "Nouns and their kinds", "Pronouns and their kinds","Adjectives and their types","Verb","Adverbs and their types"],
+			datasets: [{
+				label: 'Percentage Scored',
+				data: [value1, value2, value3, value4, value5, value6, value7, value8],
+				backgroundColor: 'rgba(70, 192, 192, 0.6)',
+				borderColor: 'rgba(150, 100, 255, 1)',
+				borderWidth: 1
+			}]
+		};
+
+		// Configuration options for the chart
+		let options = {
+			scales: {
+				y: {
+					beginAtZero: true,
+                    label: "Percentage Scored"
+				}
+			}
+		};
+
+		// Get the canvas element
+		let ctx = document.getElementById('myBarChart')
+			.getContext('2d');
+
+		// Create the bar chart
+		let myBarChart = new Chart(ctx, {
+			type: 'bar',
+			data: data,
+			options: options
+		});
+
+		 function resize(){
+			myBarChart.resize(400,350)
+		 }
+		 resize();
+	</script>
+
+</body>
+
+</html>
